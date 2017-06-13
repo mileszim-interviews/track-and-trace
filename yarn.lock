@@ -2042,7 +2042,7 @@ ember-cli-app-version@^3.0.0:
     ember-cli-htmlbars "^1.0.0"
     git-repo-version "0.4.1"
 
-ember-cli-babel@5.1.6, ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.5:
+ember-cli-babel@5.1.6, ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.1.6.tgz#d3e4fe59d96589adf7db1d99ff4f6b9dfa9dc132"
   dependencies:
@@ -2093,6 +2093,12 @@ ember-cli-dependency-checker@^1.3.0:
     chalk "^0.5.1"
     is-git-url "^0.2.0"
     semver "^4.1.0"
+
+ember-cli-document-title@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ember-cli-document-title/-/ember-cli-document-title-0.3.3.tgz#0441d64e3ab7a64b220f8c54a144ab927d6138af"
+  dependencies:
+    ember-cli-babel "^5.1.6"
 
 ember-cli-eslint@^3.0.0:
   version "3.1.0"
