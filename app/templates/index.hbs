@@ -1,1 +1,21 @@
-<h1>Hello</h1>
+<div class="row">
+  <div class="col-sm-0 col-md-3 col-lg-3"></div>
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <h1>Find a Booking</h1>
+    <form {{action (perform findReference this) on="submit"}}>
+      <div class="form-group">
+        {{input type='text' value=fullReferenceNumber class="form-control" placeholder="PABVTXG790195200" autofocus="true"}}
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-primary btn-block" disabled={{findReference.isRunning}}>
+          {{#if findReference.isRunning}}
+            Searching...
+          {{else}}
+            Lookup
+          {{/if}}
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-0 col-md-3 col-lg-3"></div>
+</div>
