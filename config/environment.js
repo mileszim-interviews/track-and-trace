@@ -20,7 +20,10 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    firebase: require('./initializers/emberfire')(process),
+    contentSecurityPolicy: require('./initializers/content-security-policy')(process),
   };
 
   if (environment === 'development') {
