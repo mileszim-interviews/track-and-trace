@@ -11,8 +11,8 @@ moduleForModel('booking', 'Unit | Model | booking', {
   ]
 });
 
-test('it exists', function(assert) {
+test('referenceNumber removes PABV', function(assert) {
   let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+  model.set('id', 'PABVTXG790195200')
+  assert.equal(model.get('referenceNumber'), 'TXG790195200');
 });
