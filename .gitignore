@@ -20,4 +20,5 @@ testem.log
 
 # ENV
 /config/.env.*
+.env.*
 .env
