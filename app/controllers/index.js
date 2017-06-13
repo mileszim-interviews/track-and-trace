@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   fetchBooking: Ember.inject.service('fetch-booking'),
   foundReference: null,
 
-  referenceNumber(fullReferenceNumber) {
+  referenceNumber(fullReferenceNumber = '') {
     return fullReferenceNumber.replace('PABV', '');
   },
 
@@ -37,9 +37,10 @@ export default Ember.Controller.extend({
   }),
 
   needsRefresh: task(function * (booking) {
+    const bookingDate = yield booking.get('date');
     const fourHours = 4 * 1000 * 60 * 60;
     const fourHoursAgo = Date.now() - fourHours;
-    const isOverFourHoursOld = (Date.now() - booking.get('date')) > fourHoursAgo;
+    const isOverFourHoursOld = (Date.now() - bookingDate) > fourHoursAgo;
     if (isOverFourHoursOld) { return true; }
     return false;
   })

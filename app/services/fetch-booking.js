@@ -6,11 +6,10 @@ export default Ember.Service.extend({
 
   fetch: task(function * (referenceNumber) {
     try {
-      let response = yield this.get('ajax').request('/shared/ajax/', {
+      let response = yield this.get('ajax').request('/fetchBooking', {
         method: 'GET',
         data: {
-          fn: 'get_tracktrace_bl',
-          ref_num: referenceNumber
+          referenceNumber: referenceNumber
         }
       });
       let parsedResponse = yield this.get('parseResponse').perform(response);

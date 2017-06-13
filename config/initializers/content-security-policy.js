@@ -17,6 +17,7 @@ module.exports = (process) => {
       "'self'",
       "wss://*.firebaseio.com",
       "https://*.googleapis.com",
+      "https://*.cloudfunctions.net"
     ],
     'style-src': [
       "'self'",

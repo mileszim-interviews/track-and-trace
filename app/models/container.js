@@ -4,6 +4,7 @@ import Ember from 'ember';
 export default DS.Model.extend({
   size: DS.attr('number'),
   kind: DS.attr('string'),
+  movement: DS.attr('string'),
 
   // Associations
   booking: DS.belongsTo('booking'),
