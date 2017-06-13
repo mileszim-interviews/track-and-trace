@@ -14,6 +14,12 @@ module.exports = function(defaults) {
         development: './config/.env.development',
       }
     },
+
+    'ember-bootstrap': {
+      'bootstrapVersion': 4,
+      'importBootstrapFont': true,
+      'importBootstrapCSS': false
+    }
   });
 
   return app.toTree();
