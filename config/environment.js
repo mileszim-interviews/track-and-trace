@@ -24,6 +24,7 @@ module.exports = function(environment) {
 
     firebase: require('./initializers/emberfire')(process),
     contentSecurityPolicy: require('./initializers/content-security-policy')(process),
+    'ember-load': require('./initializers/load')(process),
   };
 
   if (environment === 'development') {

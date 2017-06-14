@@ -11,13 +11,12 @@ export default Ember.Controller.extend({
   },
 
   findReference: task(function * (form) {
-    // Check if reference number has been found and is old
-    // If so, update the local one
     try {
       const fullReferenceNumber = form.get('fullReferenceNumber');
       //let booking = yield this.get('store').findRecord('booking', fullReferenceNumber);
       let referenceNumber = this.referenceNumber(fullReferenceNumber);
       let bookingInfo = yield this.get('fetchBooking').get('fetch').perform(referenceNumber);
+      console.log(bookingInfo);
     } catch(error) {
       console.log(error);
     }
@@ -27,7 +26,7 @@ export default Ember.Controller.extend({
     try {
       let bookingNeedsRefresh = yield this.get('needsRefresh').perform(booking);
       if (bookingNeedsRefresh) {
-        let referenceNumber = booking.get('referenceNumber');
+        let referenceNumber = yield booking.get('referenceNumber');
         let bookingInfo = yield this.get('fetchBooking').fetch(referenceNumber);
         // continue
       }

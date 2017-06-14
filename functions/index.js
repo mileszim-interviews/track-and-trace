@@ -31,7 +31,6 @@ exports.fetchBooking = functions.https.onRequest((req, res) => {
 
     let bookingResponse = {
       id: null,
-      container: {},
       origin: {},
       destination: {},
       vessel: {},
@@ -45,7 +44,7 @@ exports.fetchBooking = functions.https.onRequest((req, res) => {
     // Parse schedule table
     let schedule = cheerio.load(data["scheduletable"], { xmlMode: true });
     if (schedule('.arrival-delivery').html().includes('<br/>')) {
-      bookingResponse.voyage.arrival = schedule('.arrival-delivery').html().split('<br/>').slice(-1);
+      bookingResponse.voyage.arrival = schedule('.arrival-delivery').html().split('<br/>').slice(-1)[0];
     }
     if(schedule('.location').html().includes('<br/>')) {
       var parsed = schedule('.location').html().split('<br/>');
@@ -54,18 +53,24 @@ exports.fetchBooking = functions.https.onRequest((req, res) => {
     }
     if(schedule('.vessel-voyage').html().includes('<br/>')) {
       var parsed = schedule('.vessel-voyage').html().split('<br/>');
-      bookingResponse.vessel.id = parsed[2];
+      bookingResponse.vessel.id = parsed[1].toLowerCase().replace(' ', '-');
       bookingResponse.vessel.name = parsed[1];
-    }
-    if(schedule('.vessel-voyage').html().includes('<br/>')) {
-      var parsed = schedule('.vessel-voyage').html().split('<br/>');
-      bookingResponse.vessel.id = parsed[2];
-      bookingResponse.vessel.name = parsed[1];
+      bookingResponse.voyage.id = parsed[2];
     }
     if(schedule('.next-location').html().includes('<br/>')) {
       var parsedLocation = schedule('.next-location').html().split('<br/>');
       bookingResponse.destination.id = parsedLocation[2];
-      //bookingResponse.destination.name = parsedLocation[1]; TODO: FIND NAME
+    }
+
+    // Parse scheduleinfo
+    let scheduleinfo = cheerio.load(data["scheduleinfo"], { xmlMode: true });
+    if (scheduleinfo.html().includes('<br/>')) {
+      var destinationName = scheduleinfo.html().split('<br/>').find((item) => item.includes('Place of Delivery'));
+      var destination = cheerio.load(destinationName)('b').text()
+      destinationName = destination.match(/^(.+)\ \[/);
+      var destinationID = destination.match(/\[(.+)\]/);
+      bookingResponse.destination.id = destinationID[1];
+      bookingResponse.destination.name = destinationName[1];
     }
 
     // Parse containers
